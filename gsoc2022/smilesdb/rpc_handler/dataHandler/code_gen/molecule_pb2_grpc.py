@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import molecule_pb2 as molecule__pb2
+import dataHandler.code_gen.molecule_pb2 as molecule__pb2
 
 
 class MoleculeServiceStub(object):
