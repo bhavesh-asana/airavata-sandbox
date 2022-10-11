@@ -14,15 +14,16 @@ import org.bson.types.ObjectId;
 public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
 
     // MongoDB connection string
+    // private final MongoClient mongoClient = MongoClients.create(
+    //         "mongodb://root:indiana@149.165.159.151:27017");
     private final MongoClient mongoClient = MongoClients.create(
-            "mongodb://root:indiana@149.165.159.151:27017");
-
+            "mongodb://localhost:27017");
     // MongoDB Database name
     private final MongoDatabase mongoDatabase = mongoClient.getDatabase(
             "smilesDB");
     // MongoDB Collection name
     private final MongoCollection<org.bson.Document> mongoCollection = mongoDatabase.getCollection(
-            "MoleculeData");
+            "molecule");
 
     // Adding a object document for Molecule Model
     private Molecule documentToMolecule(Document document) {
@@ -56,13 +57,13 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 ? ""
                                 : document.getString("emp_formula_source"))
                 .setMw(
-                        document.getDouble("mw") == null ? 99999999 : document.getDouble("mw"))
+                        document.getDouble("mw") == null ? Double.parseDouble("NaN") : document.getDouble("mw"))
                 .setMwMonoiso(
                         document.getDouble("mw_monoiso") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("mw_monoiso"))
                 .setRdb(
-                        document.getDouble("rdb") == null ? 99999999 : document.getDouble("rdb"))
+                        document.getDouble("rdb") == null ? Double.parseDouble("NaN"): document.getDouble("rdb"))
                 .setMwSource(
                         document.getString("mw_source") == null
                                 ? ""
@@ -105,10 +106,10 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                         document.getString("org_met") == null
                                 ? ""
                                 : document.getString("org_met"))
-                .setMolChrg(
-                        document.getInteger("mol_chrg") == null
-                                ? 99999999
-                                : document.getInteger("mol_chrg"))
+                // .setMolChrg(
+                //         document.getInteger("mol_chrg") == null
+                //                 ? Integer.valueOf("NaN")
+                //                 : document.getInteger("mol_chrg"))
                 .setStateOfmat(
                         document.getString("state_ofmat") == null
                                 ? ""
@@ -123,7 +124,7 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 : document.getString("color_uv"))
                 .setAbsorbMax(
                         document.getDouble("absorb_max") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("absorb_max"))
                 .setSolventAe(
                         document.getString("solvent_ae") == null
@@ -131,43 +132,43 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 : document.getString("solvent_ae"))
                 .setAbsorb(
                         document.getDouble("absorb") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("absorb"))
                 .setConc(
                         document.getDouble("conc") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("conc"))
                 .setExtinc(
                         document.getDouble("extinc") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("extinc"))
                 .setEmisMax(
                         document.getDouble("emis_max") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("emis_max"))
                 .setTempAbs(
                         document.getDouble("temp_abs") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("temp_abs"))
                 .setEmisQy(
                         document.getDouble("emis_qy") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("emis_qy"))
                 .setTempEms(
                         document.getDouble("temp_ems") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("temp_ems"))
                 .setLifetime(
                         document.getDouble("lifetime") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("lifetime"))
                 .setTempCv(
                         document.getDouble("temp_cv") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("temp_cv"))
                 .setReducPot(
                         document.getDouble("reduc_pot") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("reduc_pot"))
                 .setHwOrPkRp(
                         document.getString("hw_or_pk_rp") == null
@@ -175,7 +176,7 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 : document.getString("hw_or_pk_rp"))
                 .setOxidPot(
                         document.getDouble("oxid_pot") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("oxid_pot"))
                 .setHwOrPkOp(
                         document.getString("hw_or_pk_op") == null
@@ -199,7 +200,7 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 : document.getString("inter_thngs"))
                 .setDensity20(
                         document.getDouble("density_20") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("density_20"))
                 .setDensity20Source(
                         document.getString("density_20_source") == null
@@ -207,11 +208,11 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 : document.getString("density_20_source"))
                 .setDefaultWarnLevel(
                         document.getDouble("default_warn_level") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("default_warn_level"))
                 .setN20(
                         document.getDouble("n_20") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("n_20"))
                 .setN20Source(
                         document.getString("n_20_source") == null
@@ -219,11 +220,11 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 : document.getString("n_20_source"))
                 .setMpLow(
                         document.getDouble("mp_low") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("mp_low"))
                 .setMpHigh(
                         document.getDouble("mp_high") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("mp_high"))
                 .setMpSource(
                         document.getString("mp_source") == null
@@ -231,15 +232,15 @@ public class MoleculeImpl extends MoleculeServiceGrpc.MoleculeServiceImplBase {
                                 : document.getString("mp_source"))
                 .setBpLow(
                         document.getDouble("bp_low") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("bp_low"))
                 .setBpHigh(
                         document.getDouble("bp_high") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("bp_high"))
                 .setBpPress(
                         document.getDouble("bp_press") == null
-                                ? 99999999
+                                ? Double.parseDouble("NaN")
                                 : document.getDouble("bp_press"))
                 .setPressUnit(
                         document.getString("press_unit") == null
